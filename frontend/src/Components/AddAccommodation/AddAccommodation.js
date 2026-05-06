@@ -292,9 +292,9 @@ const AddAccommodation = () => {
       }
     }
 
-    const getYesterday = () => {
+    const getTwoYearsFromNow = () => {
       const d = new Date();
-      d.setDate(d.getDate() - 1);
+      d.setFullYear(d.getFullYear() + 2);
       return d.toISOString();
     };
 
@@ -319,7 +319,7 @@ const AddAccommodation = () => {
       utilityBills:      { electricityIncluded: utilities.electricity, waterIncluded: utilities.water },
       images:            imageIds,
       isAvailable:       true,
-      expireDate:        getYesterday(),
+      expireDate:        getTwoYearsFromNow(),
     };
 
     try {
