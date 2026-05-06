@@ -264,17 +264,29 @@ const Boarding = () => {
   // ── Fetch existing favourites ─────────────────────────────────────────
   useEffect(() => {
     if (!userId) return;
-    fetch(`${API_BASE}/favourite/${userId}?itemType=Accommodation`)
-      .then(r => r.json())
-      .then(raw => {
-        const list = unwrap(raw);
-        const ids  = (Array.isArray(list) ? list : []).map(f =>
-          typeof f.itemId === "object" ? f.itemId._id : f.itemId
-        );
-        setFavouriteIds(new Set(ids));
-      })
-      .catch(() => {});
-  }, [userId]);
+    // Check favourite status for each accommodation individually
+    const checkFavourites = async () => {
+      const favIds = new Set();
+      const promises = accommodations.map(async (acc) => {
+        try {
+          const response = await fetch(`${API_BASE}/favourite/check/${userId}/${acc._id}/Accommodation`);
+          const result = await response.json();
+          if (result?.isFavourited === true) {
+            favIds.add(acc._id);
+          }
+        } catch (error) {
+          // Silent fail for individual checks
+        }
+      });
+      
+      await Promise.all(promises);
+      setFavouriteIds(favIds);
+    };
+    
+    if (accommodations.length > 0) {
+      checkFavourites();
+    }
+  }, [userId, accommodations]);
 
   // ── Toggle favourite ──────────────────────────────────────────────────
   const handleToggleFavourite = async (accId, currentlyFavourited) => {
