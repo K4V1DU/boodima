@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="hf-footer">
       <div className="hf-left">
-        <span>© 2026 Unisewana, Inc.</span>
+        <span>© 2026 boodima.lk, Inc.</span>
         <a href="#">Privacy</a>
         <a href="#">Terms</a>
       </div>
