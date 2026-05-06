@@ -7,6 +7,8 @@ import {
   FaSignOutAlt, FaArrowLeft, FaKey,
 } from "react-icons/fa";
 import "./UserProfile.css";
+import StudentNavbar from "../NavBar/Student_NavBar/StudentNavbar";
+import Loader from "../Overlays/LoadingScreen/Loader";
 
 const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
@@ -48,6 +50,62 @@ function Toast({ message, type = "success", onClose }) {
     <div className={`up-toast up-toast--${type}`}>
       {type === "success" ? <FaCheckCircle /> : <FaTimes />}
       <span>{message}</span>
+    </div>
+  );
+}
+
+// ─── Profile Skeleton Components ────────────────────────────────────────────────
+function ProfileSkeleton() {
+  return (
+    <div className="up-page">
+      {/* Skeleton Header Banner */}
+      <div className="up-banner">
+        <div className="up-banner__noise" />
+        <div className="up-banner__content">
+          <div className="up-skeleton-btn" />
+          <div className="up-skeleton-title" />
+        </div>
+      </div>
+
+      {/* Skeleton Main Card */}
+      <div className="up-container">
+        <div className="up-card">
+          {/* Skeleton Avatar Section */}
+          <div className="up-avatar-section">
+            <div className="up-avatar-wrap">
+              <div className="up-skeleton-avatar" />
+              <div className="up-skeleton-camera" />
+            </div>
+            <div className="up-avatar-info">
+              <div className="up-skeleton-username" />
+              <div className="up-skeleton-handle" />
+              <div className="up-skeleton-badges" />
+            </div>
+          </div>
+
+          {/* Skeleton Tabs */}
+          <div className="up-tabs">
+            <div className="up-skeleton-tab" />
+            <div className="up-skeleton-tab" />
+          </div>
+
+          {/* Skeleton Profile Fields */}
+          <div className="up-section">
+            <div className="up-section__header">
+              <div className="up-skeleton-section-title" />
+              <div className="up-skeleton-edit-btn" />
+            </div>
+            <div className="up-fields">
+              <div className="up-skeleton-field" />
+              <div className="up-skeleton-field" />
+              <div className="up-skeleton-field" />
+              <div className="up-skeleton-field" />
+              <div className="up-skeleton-field up-skeleton-field--full" />
+              <div className="up-skeleton-field up-skeleton-field--full" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -309,12 +367,22 @@ export default function UserProfile() {
   // ── Loading state ──────────────────────────────────────────────────────────
   if (loading) {
     return (
-      <div className="up-page">
-        <div className="up-loading">
-          <div className="up-spinner" />
-          <p>Loading profile…</p>
+      <>
+        <StudentNavbar />
+        {/* Loading overlay - shows over content but keeps navbar visible */}
+        <div className="up-loading-overlay">
+          <Loader />
         </div>
-      </div>
+        {/* Empty profile structure underneath */}
+        <div className="up-page">
+          <div className="up-banner">
+            <div className="up-banner__noise" />
+            <div className="up-banner__content">
+              <div className="up-banner__title">Loading Profile...</div>
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 

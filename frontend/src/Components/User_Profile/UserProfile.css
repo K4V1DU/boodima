@@ -38,6 +38,142 @@
   color:        var(--up-text);
 }
 
+/* ── Loading Overlay ─────────────────────────────────────────────────────── */
+.up-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+/* ── Skeleton Loading ────────────────────────────────────────────────────── */
+@keyframes up-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.up-skeleton-btn {
+  width: 80px;
+  height: 36px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: up-shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+.up-skeleton-title {
+  width: 180px;
+  height: 28px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: up-shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+.up-skeleton-avatar {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: up-shimmer 1.5s infinite;
+  border-radius: 50%;
+}
+
+.up-skeleton-camera {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: up-shimmer 1.5s infinite;
+  border-radius: 50%;
+}
+
+.up-skeleton-username {
+  width: 160px;
+  height: 24px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: up-shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.up-skeleton-handle {
+  width: 120px;
+  height: 16px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: up-shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.up-skeleton-badges {
+  display: flex;
+  gap: 8px;
+}
+
+.up-skeleton-badges::before,
+.up-skeleton-badges::after {
+  content: '';
+  width: 80px;
+  height: 24px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: up-shimmer 1.5s infinite;
+  border-radius: 12px;
+}
+
+.up-skeleton-tab {
+  width: 100px;
+  height: 40px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: up-shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+.up-skeleton-section-title {
+  width: 140px;
+  height: 20px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: up-shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.up-skeleton-edit-btn {
+  width: 60px;
+  height: 32px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: up-shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+.up-skeleton-field {
+  height: 44px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: up-shimmer 1.5s infinite;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.up-skeleton-field--full {
+  grid-column: 1 / -1;
+}
+
 /* ── Background blobs ────────────────────────────────────────────────────── */
 .up-page::before,
 .up-page::after {

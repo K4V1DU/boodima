@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  FaHeart, FaRegHeart, FaMapMarkerAlt, FaUtensils, FaBed,
-  FaMotorcycle, FaShoppingBag, FaExclamationCircle,
+  FaHeart, FaRegHeart, FaMapMarkerAlt, FaBed,
+  FaExclamationCircle,
 } from "react-icons/fa";
 import "./Favourites.css";
 import StudentNavbar from "../NavBar/Student_NavBar/StudentNavbar";
 import Footer from "../NavBar/Footer/Footer";
+import { usePhotoCache } from "../Image_Cache/usePhotoCache";
 
 // ─── Config ───────────────────────────────────────────────────────────────
 const API_BASE = process.env.REACT_APP_API_BASE_URL;
@@ -82,18 +83,12 @@ function SkeletonCard() {
 // ACCOMMODATION CARD
 // ─────────────────────────────────────────
 function AccCard({ item, onNavigate, onRemove }) {
-  const [imgSrc,   setImgSrc]   = useState(null);
+  const { cachedUrl } = usePhotoCache();
   const [removing, setRemoving] = useState(false);
   const available = isAvailable(item);
 
-  useEffect(() => {
-    if (item.images?.length > 0) {
-      fetch(`${API_BASE}/Photo/${item.images[0]}`)
-        .then(r => r.blob())
-        .then(blob => setImgSrc(URL.createObjectURL(blob)))
-        .catch(() => {});
-    }
-  }, [item]);
+  const photoId = item.images?.[0];
+  const imgSrc  = cachedUrl(photoId);
 
   const handleRemove = async (e) => {
     e.stopPropagation();
@@ -110,9 +105,10 @@ function AccCard({ item, onNavigate, onRemove }) {
     >
       <div className="fav-card__image-wrap">
         {imgSrc
-          ? <img src={imgSrc} alt={item.title} className="fav-card__image"
-              onError={() => setImgSrc(null)} />
-          : <div className="fav-card__image-fallback"><FaBed /></div>}
+          ? <img src={imgSrc} alt={item.title} className="fav-card__image" />
+          : photoId
+            ? <div className="fav-card__image-fallback fav-skeleton-box" />
+            : <div className="fav-card__image-fallback"><FaBed /></div>}
 
         {!available && (
           <div className="fav-card__unavail-overlay">
@@ -164,127 +160,28 @@ function AccCard({ item, onNavigate, onRemove }) {
 }
 
 // ─────────────────────────────────────────
-// FOOD SERVICE CARD
-// ─────────────────────────────────────────
-function FoodCard({ item, onNavigate, onRemove }) {
-  const [imgSrc,   setImgSrc]   = useState(null);
-  const [removing, setRemoving] = useState(false);
-  const available = isAvailable(item);
-  const open      = isCurrentlyOpen(item.operatingHours);
-
-  useEffect(() => {
-    const id = item.iconImage ?? item.BackgroundImage;
-    if (id) setImgSrc(`${API_BASE}/Photo/${id}`);
-  }, [item]);
-
-  const handleRemove = async (e) => {
-    e.stopPropagation();
-    if (removing) return;
-    setRemoving(true);
-    await onRemove(item._id, "FoodService");
-    setRemoving(false);
-  };
-
-  return (
-    <div
-      className={`fav-card${!available ? " fav-card--unavailable" : ""}`}
-      onClick={() => onNavigate(item._id, "FoodService", available)}
-    >
-      <div className="fav-card__image-wrap">
-        {imgSrc
-          ? <img src={imgSrc} alt={item.kitchenName} className="fav-card__image"
-              onError={() => setImgSrc(null)} />
-          : <div className="fav-card__image-fallback"><FaUtensils /></div>}
-
-        {!available && (
-          <div className="fav-card__unavail-overlay">
-            <FaExclamationCircle style={{ fontSize: 20, marginBottom: 6 }} />
-            <span>Unavailable</span>
-          </div>
-        )}
-
-        <span className="fav-card__type-badge fav-card__type-badge--food">
-          <FaUtensils /> Food
-        </span>
-
-        <button
-          className="fav-card__remove"
-          onClick={handleRemove}
-          disabled={removing}
-          title="Remove from favourites"
-          style={{ opacity: removing ? 0.5 : 1 }}
-        >
-          <FaHeart style={{ fontSize: 14, color: removing ? "#ccc" : "var(--fav-orange)" }} />
-        </button>
-
-        {available && (
-          <div className={`fav-card__status ${open ? "fav-card__status--open" : "fav-card__status--closed"}`}>
-            <span className="fav-card__status-dot" />
-            {open ? "Open" : "Closed"}
-          </div>
-        )}
-      </div>
-
-      <div className="fav-card__body">
-        <div className="fav-card__header">
-          <h3 className="fav-card__title">{item.kitchenName}</h3>
-          {(item.ratingAverage ?? 0) > 0 && (
-            <span className="fav-card__rating">★ {item.ratingAverage.toFixed(1)}</span>
-          )}
-        </div>
-        <p className="fav-card__location">
-          <FaMapMarkerAlt style={{ color: "var(--fav-orange)", fontSize: 11, flexShrink: 0 }} />
-          {item.address}
-        </p>
-        <div className="fav-card__footer">
-          <span className="fav-card__meta">
-            {(item.ratingCount ?? 0) > 0
-              ? `${item.ratingCount} review${item.ratingCount !== 1 ? "s" : ""}`
-              : "No reviews yet"}
-          </span>
-          <div className="fav-card__tags">
-            {item.deliveryAvailable && (
-              <span className="fav-card__tag fav-card__tag--delivery">
-                <FaMotorcycle style={{ fontSize: 9 }} /> Delivery
-              </span>
-            )}
-            {item.pickupAvailable && (
-              <span className="fav-card__tag fav-card__tag--pickup">
-                <FaShoppingBag style={{ fontSize: 9 }} /> Pickup
-              </span>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────
 // EMPTY STATE
 // ─────────────────────────────────────────
-function EmptyState({ tab }) {
+function EmptyState() {
   const navigate = useNavigate();
   return (
     <div className="fav-empty">
       <div className="fav-empty__img-wrap">
         <img
-          src={tab === "accommodations" ? "/Images/icon4.jpg" : "/Images/icon5.jpg"}
-          alt={tab === "accommodations" ? "No boardings saved" : "No food services saved"}
+          src="/Images/icon4.jpg"
+          alt="No boardings saved"
           className="fav-empty__img"
         />
       </div>
       <p className="fav-empty__title">No favourites yet</p>
       <p className="fav-empty__sub">
-        {tab === "accommodations"
-          ? "Browse boardings and tap the heart to save them here."
-          : "Browse food services and tap the heart to save them here."}
+        Browse boardings and tap the heart to save them here.
       </p>
       <button
         className="fav-empty__btn"
-        onClick={() => navigate(tab === "accommodations" ? "/Boardings" : "/Foods")}
+        onClick={() => navigate("/Boardings")}
       >
-        {tab === "accommodations" ? "Browse Boardings" : "Browse Foods"}
+        Browse Boardings
       </button>
     </div>
   );
@@ -297,52 +194,34 @@ export default function Favourites() {
   const navigate = useNavigate();
   const userId   = localStorage.getItem("CurrentUserId");
 
-  const [tab,        setTab]        = useState("accommodations");
   const [accItems,   setAccItems]   = useState([]);
-  const [foodItems,  setFoodItems]  = useState([]);
   const [loading,    setLoading]    = useState(true);
-  const [tabLoading, setTabLoading] = useState(false);
   const [showUnavailable, setShowUnavailable] = useState(false);
 
-  // ── Fetch both favourite lists ────────────────────────────────────────
+  // ── Fetch favourite accommodations ────────────────────────────────────────
   useEffect(() => {
     if (!userId) { navigate("/Login"); return; }
 
-    const fetchAll = async () => {
+    const fetchAccommodations = async () => {
       setLoading(true);
       try {
-        const [accRes, foodRes] = await Promise.all([
-          fetch(`${API_BASE}/favourite/${userId}?itemType=Accommodation`).then(r => r.json()),
-          fetch(`${API_BASE}/favourite/${userId}?itemType=FoodService`).then(r => r.json()),
-        ]);
-        const accList  = unwrap(accRes);
-        const foodList = unwrap(foodRes);
-        setAccItems((Array.isArray(accList)  ? accList  : []).map(f => f.itemId).filter(Boolean));
-        setFoodItems((Array.isArray(foodList) ? foodList : []).map(f => f.itemId).filter(Boolean));
+        const accRes = await fetch(`${API_BASE}/favourite/${userId}?itemType=Accommodation`).then(r => r.json());
+        const accList = unwrap(accRes);
+        setAccItems((Array.isArray(accList) ? accList : []).map(f => f.itemId).filter(Boolean));
       } catch {
         setAccItems([]);
-        setFoodItems([]);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchAll();
+    fetchAccommodations();
   }, [userId]);
-
-  // ── Tab switch with brief skeleton flash ──────────────────────────────
-  const handleTabSwitch = (newTab) => {
-    if (newTab === tab) return;
-    setTabLoading(true);
-    setTab(newTab);
-    setTimeout(() => setTabLoading(false), 350);
-  };
 
   // ── Navigate — block unavailable listings ─────────────────────────────
   const handleNavigate = (itemId, type, available) => {
     if (!available) { setShowUnavailable(true); return; }
-    if (type === "Accommodation") navigate(`/details-Accommodation/${itemId}`);
-    else navigate(`/FoodService/${itemId}`);
+    navigate(`/details-Accommodation/${itemId}`);
   };
 
   // ── Remove favourite ──────────────────────────────────────────────────
@@ -353,18 +232,12 @@ export default function Favourites() {
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({ user: userId, itemId, itemType }),
       });
-      if (itemType === "Accommodation") {
-        setAccItems(prev => prev.filter(i => i._id !== itemId));
-      } else {
-        setFoodItems(prev => prev.filter(i => i._id !== itemId));
-      }
+      setAccItems(prev => prev.filter(i => i._id !== itemId));
     } catch { /* silent */ }
   };
 
   const accCount     = accItems.length;
-  const foodCount    = foodItems.length;
-  const activeItems  = tab === "accommodations" ? accItems : foodItems;
-  const showSkeleton = loading || tabLoading;
+  const showSkeleton = loading;
 
   return (
     <div className="fav-page">
@@ -379,51 +252,26 @@ export default function Favourites() {
           <div>
             <h1 className="fav-header__title">My Favourites</h1>
             <p className="fav-header__sub">
-              {accCount + foodCount} saved place{accCount + foodCount !== 1 ? "s" : ""}
+              {accCount} saved place{accCount !== 1 ? "s" : ""}
             </p>
           </div>
         </div>
       </div>
 
-      {/* ── Tabs ── */}
-      <div className="fav-tabs">
-        <button
-          className={`fav-tab${tab === "accommodations" ? " fav-tab--active" : ""}`}
-          onClick={() => handleTabSwitch("accommodations")}
-        >
-          <FaBed style={{ fontSize: 13 }} />
-          Boardings
-          {accCount > 0 && <span className="fav-tab__count">{accCount}</span>}
-        </button>
-        <button
-          className={`fav-tab${tab === "foods" ? " fav-tab--active" : ""}`}
-          onClick={() => handleTabSwitch("foods")}
-        >
-          <FaUtensils style={{ fontSize: 13 }} />
-          Food Services
-          {foodCount > 0 && <span className="fav-tab__count">{foodCount}</span>}
-        </button>
-      </div>
-
       {/* ── Grid ── */}
       <section className="fav-section">
-        {showSkeleton ? (
+        {loading ? (
           <div className="fav-grid">
-            {Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)}
+            {Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)}
           </div>
-        ) : activeItems.length === 0 ? (
-          <EmptyState tab={tab} />
+        ) : accItems.length === 0 ? (
+          <EmptyState />
         ) : (
           <div className="fav-grid">
-            {tab === "accommodations"
-              ? accItems.map(item => (
-                  <AccCard key={item._id} item={item}
-                    onNavigate={handleNavigate} onRemove={handleRemove} />
-                ))
-              : foodItems.map(item => (
-                  <FoodCard key={item._id} item={item}
-                    onNavigate={handleNavigate} onRemove={handleRemove} />
-                ))}
+            {accItems.map(item => (
+              <AccCard key={item._id} item={item}
+                onNavigate={handleNavigate} onRemove={handleRemove} />
+            ))}
           </div>
         )}
       </section>
