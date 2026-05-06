@@ -1,0 +1,33 @@
+/* ─── Footer.css ─────────────────────────────────────────────────────── */
+
+.hf-footer {
+  background: #f7f7f7;
+  border-top: 1px solid #ebebeb;
+  height: 56px;
+  padding: 0 32px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  flex-shrink: 0;
+}
+
+.hf-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+  color: #717171;
+}
+.hf-left a { color: #717171; text-decoration: none; transition: color 0.15s; }
+.hf-left a:hover { color: #1b1b1b; }
+
+.hf-right { display: flex; align-items: center; gap: 16px; }
+.hf-right a { color: #1b1b1b; font-size: 15px; text-decoration: none; transition: opacity 0.15s; }
+.hf-right a:hover { opacity: 0.6; }
+
+@media (max-width: 1024px) { .hf-footer { padding: 0 20px; } }
+@media (max-width: 520px) {
+  .hf-footer { height: auto; padding: 16px 20px; flex-direction: column; gap: 12px; text-align: center; }
+}

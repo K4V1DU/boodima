@@ -1,0 +1,23 @@
+const mongoose = require("mongoose");
+
+const photoSchema = new mongoose.Schema({
+  data: { 
+    type: Buffer, 
+    required: true 
+  },  // raw image data
+
+
+  contentType: { 
+    type: String, 
+    required: true 
+  },      // e.g., "image/jpeg"
+  
+  
+  order: { 
+    type: Number, 
+    default: 0, 
+    min: 0 
+  }       // display order for this image
+}, { timestamps: true });
+
+module.exports = mongoose.model("Photo", photoSchema);

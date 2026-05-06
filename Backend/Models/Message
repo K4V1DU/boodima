@@ -1,0 +1,75 @@
+const mongoose = require("mongoose");
+
+
+const conversationSchema = new mongoose.Schema(
+  {
+    // Exactly two participants [studentId, hostId]
+    participants: [
+      {
+        type:     mongoose.Schema.Types.ObjectId,
+        ref:      "User",
+        required: true,
+      },
+    ],
+
+    // Snapshot of the last message — used for inbox preview without loading messages
+    lastMessage: {
+      content:   { type: String,                         default: "" },
+      sender:    { type: mongoose.Schema.Types.ObjectId, default: null },
+      createdAt: { type: Date,                           default: null },
+    },
+
+    // Unread count per participant — { "userId": count }
+    unreadCount: {
+      type:    Map,
+      of:      Number,
+      default: {},
+    },
+  },
+  { timestamps: true }
+);
+
+// Find all conversations for a user, sorted by most recent
+conversationSchema.index({ participants: 1, updatedAt: -1 });
+
+
+const messageSchema = new mongoose.Schema(
+  {
+    conversation: {
+      type:     mongoose.Schema.Types.ObjectId,
+      ref:      "Conversation",
+      required: true,
+    },
+    sender: {
+      type:     mongoose.Schema.Types.ObjectId,
+      ref:      "User",
+      required: true,
+    },
+    content: {
+      type:      String,
+      required:  true,
+      trim:      true,
+      maxlength: 2000,
+    },
+    isRead: {
+      type:    Boolean,
+      default: false,
+    },
+    readAt: {
+      type:    Date,
+      default: null,
+    },
+  },
+  { timestamps: true }
+);
+
+// Load messages for a conversation in chronological order (supports pagination)
+messageSchema.index({ conversation: 1, createdAt: -1 });
+
+// Quickly mark all unread messages in a conversation as read
+messageSchema.index({ conversation: 1, isRead: 1 });
+
+const Conversation = mongoose.model("Conversation", conversationSchema);
+const Message      = mongoose.model("Message",      messageSchema);
+
+module.exports = { Conversation, Message };

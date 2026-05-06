@@ -1,0 +1,99 @@
+/* ─── OtpVerify.css ───────────────────────────────────────────────────────
+   Extends Register.css — import BOTH files in OtpVerify.jsx
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* ── Email icon header ───────────────────────────────────────────────────── */
+.otp-icon-wrap {
+  width: 56px; height: 56px;
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  border: 2px solid #f0c080;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  color: #e67e22;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 14px rgba(230,126,34,0.15);
+}
+
+/* ── Email highlight ─────────────────────────────────────────────────────── */
+.otp-email-highlight {
+  color: #c8541a;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+/* ── 6 digit boxes ───────────────────────────────────────────────────────── */
+.otp-boxes {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 8px 0 4px;
+}
+
+.otp-box {
+  width: 52px; height: 60px;
+  text-align: center;
+  font-size: 24px; font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  color: #1a1a1a;
+  border: 2px solid #e0d8cf;
+  border-radius: 12px;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  caret-color: #e67e22;
+}
+
+.otp-box:focus {
+  border-color: #e67e22;
+  box-shadow: 0 0 0 3px rgba(230,126,34,0.15);
+  transform: translateY(-2px);
+}
+
+.otp-box--filled {
+  border-color: #e67e22;
+  background: #fff8f2;
+  color: #c8541a;
+}
+
+.otp-box--expired {
+  border-color: #fca5a5 !important;
+  background: #fff8f8 !important;
+  color: #dc2626 !important;
+  box-shadow: none !important;
+}
+
+/* ── Timer ───────────────────────────────────────────────────────────────── */
+.otp-timer {
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: color 0.3s;
+}
+
+.otp-timer strong {
+  color: #e67e22;
+  font-weight: 600;
+}
+
+.otp-timer--expired {
+  color: #dc2626;
+}
+
+.otp-timer--expired strong {
+  color: #dc2626;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .otp-box {
+    width: 42px; height: 52px;
+    font-size: 20px;
+    border-radius: 10px;
+  }
+  .otp-boxes { gap: 7px; }
+}

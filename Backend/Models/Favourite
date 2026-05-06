@@ -1,0 +1,27 @@
+const mongoose = require("mongoose");
+
+const favouriteSchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    itemId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      refPath: "itemType",
+    },
+    itemType: {
+      type: String,
+      required: true,
+      enum: ["Accommodation", "FoodService"],
+    },
+  },
+  { timestamps: true }
+);
+
+// Prevent duplicate favourites for the same user + item
+favouriteSchema.index({ user: 1, itemId: 1, itemType: 1 }, { unique: true });
+
+module.exports = mongoose.model("Favourite", favouriteSchema);

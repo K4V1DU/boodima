@@ -1,0 +1,144 @@
+const mongoose = require("mongoose");
+
+const accommodationSchema = new mongoose.Schema(
+  {
+    
+    owner: {
+      type: String,
+      required: true,
+    },
+
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    description: {
+      type: String,
+      trim: true,
+    },
+
+    address: {
+      type: String,
+      required: true,
+    },
+
+    accommodationType: {
+      type: String,
+      enum: ["Apartment", "House", "Shared Room", "Private Room"],
+      required: true,
+    },
+
+    genderPreference: {
+      type: String,
+      enum: ["boys", "girls", "mixed"],
+      required: true,
+    },
+
+    
+    bedrooms: {
+      type: Number,
+      default: 1,
+    },
+
+    beds: {
+      type: Number,
+      default: 1,
+    },
+
+    bathrooms: {
+      type: Number,
+      default: 1,
+    },
+
+    
+    utilityBills: {
+      electricityIncluded: {
+        type: Boolean,
+        default: false,
+      },
+      waterIncluded: {
+        type: Boolean,
+        default: false,
+      },
+    },
+
+    
+    pricePerMonth: {
+      type: Number,
+      required: true,
+    },
+
+    keyMoneyDuration: {
+      type: Number,
+      default: 0,
+    },
+
+    images: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Photo",
+      },
+    ],
+
+   
+    amenities: [String],
+
+    rules: [String],
+
+    
+    location: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        default: "Point",
+      },
+      coordinates: {
+        type: [Number], 
+        required: true,
+      },
+    },
+
+    distance: {
+      type: String,
+      required: true,
+      default: "Distance not available", 
+    },
+    
+    reviews: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
+
+    ratingAverage: {
+      type: Number,
+      default: 0,
+    },
+
+    ratingCount: {
+      type: Number,
+      default: 0,
+    },
+
+    
+    isAvailable: {
+      type: Boolean,
+      default: false,
+    },
+
+    expireDate: {
+      type: Date,
+    },
+  },
+  { timestamps: true },
+);
+
+
+accommodationSchema.index({ location: "2dsphere" });
+
+module.exports =
+  mongoose.models.Accommodation ||
+  mongoose.model("Accommodation", accommodationSchema);

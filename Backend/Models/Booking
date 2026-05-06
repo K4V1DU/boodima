@@ -1,0 +1,41 @@
+const mongoose = require("mongoose");
+
+const bookingSchema = new mongoose.Schema(
+  {
+    student: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
+    accommodation: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Accommodation",
+      required: true,
+    },
+
+    visitDate: {
+      type: String, // simple (YYYY-MM-DD)
+      required: true,
+    },
+
+    visitTime: {
+      type: String, // simple (HH:mm)
+      required: true,
+    },
+
+    message: {
+      type: String,
+      default: "",
+    },
+
+    status: {
+      type: String,
+      enum: ["pending", "approved", "confirmed", "rejected", "completed", "cancelled"],
+      default: "pending",
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("Booking", bookingSchema);

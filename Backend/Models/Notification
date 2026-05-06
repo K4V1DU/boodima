@@ -1,0 +1,47 @@
+// models/Notification.js
+const mongoose = require("mongoose");
+
+const NotificationSchema = new mongoose.Schema(
+  {
+    // Who receives this notification
+    recipient: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
+    },
+
+    // Notification type — used for icon/colour in frontend
+    type: {
+      type: String,
+      enum: [
+        "order_placed",       // student placed an order
+        "order_status",       // order accepted / rejected / ready
+        "payment_verified",   // host payment confirmed
+        "payment_rejected",   // host payment rejected by admin
+        "message_received",   // new chat message
+        "booking_request",    // new boarding booking request
+        "booking_status",     // booking accepted / rejected
+      ],
+      required: true,
+    },
+
+    title:   { type: String, required: true },
+    message: { type: String, required: true },
+
+    // Optional deep-link so clicking the notification navigates somewhere
+    link: { type: String, default: null },
+
+    // Reference to the related document (order id, payment id, etc.)
+    refId:   { type: mongoose.Schema.Types.ObjectId, default: null },
+    refType: { type: String, default: null }, // "FoodOrder" | "Payment" | "Booking" | "Message"
+
+    read: { type: Boolean, default: false, index: true },
+  },
+  { timestamps: true }
+);
+
+// Compound index for fast unread count queries
+NotificationSchema.index({ recipient: 1, read: 1 });
+
+module.exports = mongoose.model("Notification", NotificationSchema);
