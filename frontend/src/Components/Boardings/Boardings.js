@@ -440,7 +440,7 @@ const Boarding = () => {
 
         {error && (
           <div className="bd-error">
-            <img src="/Images/icon6.jpg" alt="Connection error" className="bd-error__img" />
+            <img src="/Images/icon7.jpg" alt="Connection error" className="bd-error__img" />
             <div className="bd-error__title">Connection Error</div>
             <div className="bd-error__msg">Something went wrong. Please check your connection and try again.</div>
             <button className="bd-error__btn" onClick={() => window.location.reload()}>Retry</button>
@@ -456,7 +456,7 @@ const Boarding = () => {
                 ? (
                   <div className="bd-empty">
                     <div className="bd-empty__icon">
-                      <img src="/Images/icon3.jpg" alt="No boardings" className="bd-empty__img" />
+                      <img src="/Images/icon2.png" alt="No boardings" className="bd-empty__img" />
                     </div>
                     <div className="bd-empty__title">No boardings found</div>
                     <div className="bd-empty__sub">Try adjusting your search or filters</div>
