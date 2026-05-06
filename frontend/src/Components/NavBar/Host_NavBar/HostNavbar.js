@@ -29,8 +29,9 @@ function LogoutModal({ onConfirm, onCancel }) {
 
 const NAV_TABS = [
   { label: "Bookings", href: "/HostBookings", icon: <FaCalendarCheck /> },
-  { label: "Orders",   href: "/HostOrders",   icon: <FaClipboardList /> },
   { label: "Listings", href: "/Listings",     icon: <FaHome /> },
+  { label: "About Us", href: "/AboutUs",    icon: <FaHome /> },
+  { label: "Contact",   href: "/Contact",    icon: <FaHome /> },
 ];
 
 export default function HostNavbar({ activeHref = "" }) {
@@ -290,11 +291,6 @@ export default function HostNavbar({ activeHref = "" }) {
                 <div className="hn-dropdown__item"
                   onClick={() => { setShowDropdown(false); navigate("/Host-Profile"); }}>
                   <FaUser style={{ opacity: 0.55 }} /> Profile
-                </div>
-
-                <div className="hn-dropdown__item"
-                  onClick={() => { setShowDropdown(false); navigate("/PaymentHistory"); }}>
-                  <FaCreditCard style={{ opacity: 0.55 }} /> Payments
                 </div>
 
                 <div className="hn-dropdown__item"
