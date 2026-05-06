@@ -15,6 +15,8 @@ import {
   FaSignInAlt,
   FaLock,
   FaCalendarAlt,
+  FaInfoCircle,
+  FaPhone,
 } from "react-icons/fa";
 import "./StudentNavbar.css";
 import { useNotifications } from "../../../hooks/useNotifications";
@@ -197,8 +199,8 @@ export default function StudentNavbar({ activeTab = "" }) {
 
   const TABS = [
     { label: "Home", href: "/Boardings", icon: <FaHome /> },
-    { label: "About Us", href: "/AboutUs", icon: <FaHome /> },
-    { label: "Contact", href: "/Contact", icon: <FaHome /> },
+    { label: "About Us", href: "/AboutUs", icon: <FaInfoCircle /> },
+    { label: "Contact", href: "/Contact", icon: <FaPhone /> },
   ];
 
   const currentPath = window.location.pathname;

@@ -139,8 +139,8 @@ function Modal({ icon, iconClass, title, msg, children, onBg }) {
 }
 function LoginModal({ onClose, onLogin }) {
   return (
-    <Modal icon={<FaExclamationCircle />} iconClass="acd-modal__icon--warn" title="Student Login Required"
-      msg="This feature is only available for student accounts. Please login as a student to continue." onBg={onClose}>
+    <Modal icon={<FaExclamationCircle />} iconClass="acd-modal__icon--warn" title="User Login Required"
+      msg="This feature is only available for user accounts. Please login as a user to continue." onBg={onClose}>
       <div className="acd-modal__actions">
         <button className="acd-mbtn acd-mbtn--cancel" onClick={onClose}>Close</button>
         <button className="acd-mbtn acd-mbtn--primary" onClick={onLogin}><FaSignInAlt /> Go to Login</button>

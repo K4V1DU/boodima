@@ -47,10 +47,10 @@ function LoginRequiredModal({ onClose, onLogin }) {
     <div className="bd-modal-overlay" onClick={onClose}>
       <div className="bd-modal" onClick={e => e.stopPropagation()}>
         <div className="bd-modal__icon bd-modal__icon--warn"><FaExclamationCircle /></div>
-        <h3 className="bd-modal__title">Student Login Required</h3>
+        <h3 className="bd-modal__title">User Login Required</h3>
         <p className="bd-modal__msg">
-          This feature is only available for student accounts.
-          Please login as a student to continue.
+          This feature is only available for user accounts.
+          Please login as a user to continue.
         </p>
         <div className="bd-modal__actions">
           <button className="bd-modal__btn bd-modal__btn--cancel" onClick={onClose}>Close</button>
