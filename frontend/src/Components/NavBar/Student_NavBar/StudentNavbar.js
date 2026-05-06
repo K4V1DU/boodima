@@ -196,8 +196,9 @@ export default function StudentNavbar({ activeTab = "" }) {
   const isStudent     = userRole === "student";
 
   const TABS = [
-    { label: "Boardings", href: "/Boardings", icon: <FaHome /> },
-    { label: "Foods",     href: "/Foods",     icon: <FaUtensils /> },
+    { label: "Home", href: "/Boardings", icon: <FaHome /> },
+    { label: "About Us", href: "/AboutUs", icon: <FaHome /> },
+    { label: "Contact", href: "/Contact", icon: <FaHome /> },
   ];
 
   const currentPath = window.location.pathname;
@@ -269,7 +270,7 @@ export default function StudentNavbar({ activeTab = "" }) {
           )}
           {isHost && (
             <button className="snav__host-btn" onClick={() => navigate("/Listings")}>
-              Host Page
+              Owners Page
             </button>
           )}
 
@@ -356,7 +357,7 @@ export default function StudentNavbar({ activeTab = "" }) {
                       <span className="snav__dropdown-username">{currentUser.name ?? "User"}</span>
                       <span className="snav__dropdown-email">{currentUser.email ?? ""}</span>
                       <span className={`snav__dropdown-role snav__dropdown-role--${userRole}`}>
-                        {userRole}
+                        {userRole === 'host' ? 'owner' : userRole === 'student' ? 'user' : userRole}
                       </span>
                     </div>
                     <div className="snav__dropdown-divider" />
@@ -393,15 +394,7 @@ export default function StudentNavbar({ activeTab = "" }) {
                   </div>
                 )}
 
-                {/* My Orders */}
-                {(isStudent || !isLoggedIn) && (
-                  <div className="snav__dropdown-item"
-                    onClick={() => handleProtectedNav("/StudentOrders")}>
-                    <FaReceipt style={{ opacity: 0.7 }} /> My Orders
-                    {!isLoggedIn && <FaLock className="snav__dropdown-lock" />}
-                  </div>
-                )}
-
+                
                 {/* My Bookings */}
                 {(isStudent || !isLoggedIn) && (
                   <div className="snav__dropdown-item"
@@ -417,7 +410,7 @@ export default function StudentNavbar({ activeTab = "" }) {
                 {isHost && (
                   <div className="snav__dropdown-item"
                     onClick={() => { setDropdown(false); navigate("/Listings"); }}>
-                    <FaHome style={{ opacity: 0.7 }} /> Host Page
+                    <FaHome style={{ opacity: 0.7 }} /> Owners Page
                   </div>
                 )}
 
