@@ -38,7 +38,7 @@ function App() {
     <ToastProvider>
     <Routes>
       
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<Boardings />} />
       <Route path="/Login" element={<Login />} />
       <Route path="/Boardings" element={<Boardings />} />
       
