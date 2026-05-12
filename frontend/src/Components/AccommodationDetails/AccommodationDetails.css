@@ -264,6 +264,79 @@
 .acd-amenity   { display:flex;align-items:center;gap:10px;font-size:14px;color:#1b1b1b;padding:10px 14px;border:1px solid #f0f0f0;border-radius:10px;background:#fafafa; }
 .acd-amenity__icon { color:#757575;font-size:16px;flex-shrink:0; }
 
+/* Professional Utility Bills Section */
+.acd-utility-bills {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.acd-utility-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.acd-utility-item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+}
+
+.acd-utility-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: all 0.2s ease;
+}
+
+.acd-utility-icon.included {
+  background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+  color: #0284c7;
+  border: 1px solid #7dd3fc;
+}
+
+.acd-utility-icon.not-included {
+  background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+}
+
+.acd-utility-info {
+  flex: 1;
+}
+
+.acd-utility-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 4px;
+}
+
+.acd-utility-status {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.acd-utility-status.included {
+  color: #0284c7;
+}
+
+.acd-utility-status.not-included {
+  color: #6b7280;
+}
+
 .acd-hostcard { display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap; }
 .acd-hostcard__ava-wrap { position:relative;flex-shrink:0; }
 .acd-hostcard__ava { width:72px;height:72px;border-radius:50%;object-fit:cover;border:2.5px solid #e2e2e2;box-shadow:0 2px 10px rgba(0,0,0,.1); }

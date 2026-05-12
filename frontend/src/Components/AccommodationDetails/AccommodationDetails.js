@@ -9,7 +9,7 @@ import {
   FaEllipsisH, FaSignInAlt, FaExclamationCircle, FaCalendarAlt,
   FaChevronLeft, FaChevronRight, FaPen, FaTrash, FaEdit, FaKey,
   FaCheckCircle, FaClock, FaTimesCircle, FaChevronUp, FaPhone,
-  FaWhatsapp,
+  FaWhatsapp, FaBolt,
 } from "react-icons/fa";
 import StudentNavbar from "../NavBar/Student_NavBar/StudentNavbar";
 import Footer from "../NavBar/Footer/Footer";
@@ -1017,9 +1017,29 @@ const AccommodationDetails = () => {
             {acc?.utilityBills && (
               <section className="acd-section">
                 <div className="acd-sec-title">Utility Bills</div>
-                <div className="acd-amenities">
-                  <div className="acd-amenity"><FaCheck className="acd-amenity__icon" style={{ color: acc.utilityBills.electricityIncluded ? "#16a34a" : "#dc2626" }} /><span>Electricity {acc.utilityBills.electricityIncluded ? "Included" : "Not included"}</span></div>
-                  <div className="acd-amenity"><FaTint className="acd-amenity__icon" style={{ color: acc.utilityBills.waterIncluded ? "#16a34a" : "#dc2626" }} /><span>Water {acc.utilityBills.waterIncluded ? "Included" : "Not included"}</span></div>
+                <div className="acd-utility-bills">
+                  <div className="acd-utility-item">
+                    <div className={`acd-utility-icon ${acc.utilityBills.electricityIncluded ? 'included' : 'not-included'}`}>
+                      <FaBolt />
+                    </div>
+                    <div className="acd-utility-info">
+                      <div className="acd-utility-name">Electricity Bill</div>
+                      <div className={`acd-utility-status ${acc.utilityBills.electricityIncluded ? 'included' : 'not-included'}`}>
+                        {acc.utilityBills.electricityIncluded ? 'Included' : 'Not Included'}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="acd-utility-item">
+                    <div className={`acd-utility-icon ${acc.utilityBills.waterIncluded ? 'included' : 'not-included'}`}>
+                      <FaTint />
+                    </div>
+                    <div className="acd-utility-info">
+                      <div className="acd-utility-name">Water Bill</div>
+                      <div className={`acd-utility-status ${acc.utilityBills.waterIncluded ? 'included' : 'not-included'}`}>
+                        {acc.utilityBills.waterIncluded ? 'Included' : 'Not Included'}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </section>
             )}
