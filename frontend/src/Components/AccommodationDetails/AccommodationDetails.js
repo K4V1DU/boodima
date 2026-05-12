@@ -1005,7 +1005,7 @@ const AccommodationDetails = () => {
                     <button className="acd-hostcard__btn" onClick={openChat} style={{ minWidth: 120 }}>
                       <FaEnvelope style={{ marginRight: 6, fontSize: 13 }} /> Message
                     </button>
-                    <button className="acd-hostcard__btn" onClick={handleWhatsApp} style={{ minWidth: 120, background: "#25D366", color: "#fff", border: "none" }}>
+                    <button className="acd-hostcard__btn acd-hostcard__btn--whatsapp" onClick={handleWhatsApp} style={{ minWidth: 120, background: "#25D366", color: "#fff", border: "none" }}>
                       <FaWhatsapp style={{ marginRight: 6, fontSize: 14 }} /> WhatsApp
                     </button>
                   </div>
