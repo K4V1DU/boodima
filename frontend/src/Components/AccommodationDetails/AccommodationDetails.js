@@ -1001,15 +1001,12 @@ const AccommodationDetails = () => {
                       </div>
                     )}
                   </div>
-                  <div style={{ display: "flex", gap: 8, alignSelf: "flex-start", alignItems: "center", marginTop: "20px" }}>
+                  <div className="acd-hostcard__buttons-container" style={{ display: "flex", gap: 8, alignSelf: "flex-start", alignItems: "center", marginTop: "20px" }}>
                     <button className="acd-hostcard__btn" onClick={openChat} style={{ minWidth: 120 }}>
                       <FaEnvelope style={{ marginRight: 6, fontSize: 13 }} /> Message
                     </button>
                     <button className="acd-hostcard__btn" onClick={handleWhatsApp} style={{ minWidth: 120, background: "#25D366", color: "#fff", border: "none" }}>
                       <FaWhatsapp style={{ marginRight: 6, fontSize: 14 }} /> WhatsApp
-                    </button>
-                    <button className="acd-hostcard__btn acd-hostcard__btn--mobile-only" onClick={handleCall} style={{ minWidth: 120, border: "1.5px solid #FF6B2B", background: "#fff", color: "#FF6B2B" }}>
-                      <FaPhone style={{ marginRight: 6, fontSize: 13 }} /> Call
                     </button>
                   </div>
                 </div>

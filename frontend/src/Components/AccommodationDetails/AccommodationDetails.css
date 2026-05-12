@@ -539,4 +539,17 @@ input[type="time"].acd-pickers__cell-input { -webkit-appearance:textfield;appear
   .acd-hostcard__btn--mobile-only {
     display: flex;
   }
+
+  /* Host card buttons moved to bottom on mobile */
+  .acd-hostcard__buttons-container {
+    margin-top: 20px !important;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .acd-hostcard__buttons-container .acd-hostcard__btn {
+    flex: 1;
+    justify-content: center;
+    min-width: 140px;
+  }
 }
