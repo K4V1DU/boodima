@@ -553,4 +553,15 @@ input[type="time"].acd-pickers__cell-input { -webkit-appearance:textfield;appear
     justify-content: center;
     min-width: 140px;
   }
+
+  /* Show more amenities in one row on mobile */
+  .acd-amenities {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+  }
+
+  .acd-amenity {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
 }

@@ -1077,7 +1077,6 @@ const AccommodationDetails = () => {
                 {acc.beds && <div className="acd-infocard__row"><FaBed className="acd-infocard__icon" /><span>Beds: <strong>{acc.beds}</strong></span></div>}
                 {acc.keyMoneyDuration > 0 && <div className="acd-infocard__row"><FaKey className="acd-infocard__icon" /><span>Key money: <strong>{acc.keyMoneyDuration} months</strong></span></div>}
                 {acc.address && <div className="acd-infocard__row"><FaMapMarkerAlt className="acd-infocard__icon" /><span>{acc.address}</span></div>}
-                <div className="acd-infocard__row"><FaCheck className="acd-infocard__icon" style={{ color: acc.isAvailable ? "#16a34a" : "#dc2626" }} /><span style={{ color: acc.isAvailable ? "#16a34a" : "#dc2626", fontWeight: 600 }}>{acc.isAvailable ? "Available" : "Not Available"}</span></div>
               </div>
             )}
           </aside>
