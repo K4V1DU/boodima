@@ -1019,23 +1019,23 @@ const AccommodationDetails = () => {
                 <div className="acd-sec-title">Utility Bills</div>
                 <div className="acd-utility-bills">
                   <div className="acd-utility-item">
-                    <div className={`acd-utility-icon ${acc.utilityBills.electricityIncluded ? 'included' : 'not-included'}`}>
+                    <div className={`acd-utility-icon ${acc.utilityBills.electricityIncluded ? 'electricity-included' : 'not-included'}`}>
                       <FaBolt />
                     </div>
                     <div className="acd-utility-info">
                       <div className="acd-utility-name">Electricity Bill</div>
-                      <div className={`acd-utility-status ${acc.utilityBills.electricityIncluded ? 'included' : 'not-included'}`}>
+                      <div className={`acd-utility-status ${acc.utilityBills.electricityIncluded ? 'electricity-included' : 'not-included'}`}>
                         {acc.utilityBills.electricityIncluded ? 'Included' : 'Not Included'}
                       </div>
                     </div>
                   </div>
                   <div className="acd-utility-item">
-                    <div className={`acd-utility-icon ${acc.utilityBills.waterIncluded ? 'included' : 'not-included'}`}>
+                    <div className={`acd-utility-icon ${acc.utilityBills.waterIncluded ? 'water-included' : 'not-included'}`}>
                       <FaTint />
                     </div>
                     <div className="acd-utility-info">
                       <div className="acd-utility-name">Water Bill</div>
-                      <div className={`acd-utility-status ${acc.utilityBills.waterIncluded ? 'included' : 'not-included'}`}>
+                      <div className={`acd-utility-status ${acc.utilityBills.waterIncluded ? 'water-included' : 'not-included'}`}>
                         {acc.utilityBills.waterIncluded ? 'Included' : 'Not Included'}
                       </div>
                     </div>

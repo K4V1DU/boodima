@@ -301,7 +301,13 @@
   transition: all 0.2s ease;
 }
 
-.acd-utility-icon.included {
+.acd-utility-icon.electricity-included {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  color: #d97706;
+  border: 1px solid #fbbf24;
+}
+
+.acd-utility-icon.water-included {
   background: linear-gradient(135deg, #e0f2fe, #bae6fd);
   color: #0284c7;
   border: 1px solid #7dd3fc;
@@ -329,7 +335,11 @@
   font-weight: 500;
 }
 
-.acd-utility-status.included {
+.acd-utility-status.electricity-included {
+  color: #d97706;
+}
+
+.acd-utility-status.water-included {
   color: #0284c7;
 }
 
@@ -635,6 +645,31 @@ input[type="time"].acd-pickers__cell-input { -webkit-appearance:textfield;appear
 
   .acd-amenity {
     padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  /* Mobile utility bills adjustments */
+  .acd-utility-bills {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .acd-utility-item {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .acd-utility-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .acd-utility-name {
+    font-size: 15px;
+  }
+
+  .acd-utility-status {
     font-size: 13px;
   }
 }
