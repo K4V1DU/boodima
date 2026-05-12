@@ -778,7 +778,7 @@ const AccommodationDetails = () => {
     return (
       <>
         <button className="acd-bookbtn" style={{ fontFamily: FONT }} onClick={handleBookNow} disabled={bookingLoading}>
-          {bookingLoading ? <><FaSpinner className="spin" style={{ fontSize: 14 }} /> Sending Request…</> : <>Book Now</>}
+          {bookingLoading ? <><FaSpinner className="spin" style={{ fontSize: 14 }} /> Sending Request…</> : <>Ask for Visit</>}
         </button>
         <p className="acd-booknote--sub">Fix Date for Visit</p>
       </>
@@ -1152,8 +1152,8 @@ const AccommodationDetails = () => {
                 ? <><strong>Rs {acc.pricePerMonth?.toLocaleString()}</strong><span> / mo</span></>
                 : <span>View booking</span>}
             </div>
-            <button className="acd-float-book__btn" style={{ fontFamily: FONT }} onClick={scrollToBooking}>
-              <FaChevronUp style={{ fontSize: 13 }} /> Book Now
+            <button className="acd-float-book__btn" style={{ fontFamily: FONT }} onClick={handleCall} disabled={!host?.phone}>
+              {!host?.phone ? <>No Phone</> : <><FaPhone style={{ fontSize: 13 }} /> Call Now</>}
             </button>
           </div>
         </div>
