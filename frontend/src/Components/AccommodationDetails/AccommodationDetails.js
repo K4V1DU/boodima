@@ -8,7 +8,8 @@ import {
   FaExclamationTriangle, FaCommentAlt, FaUserCircle, FaFlag,
   FaEllipsisH, FaSignInAlt, FaExclamationCircle, FaCalendarAlt,
   FaChevronLeft, FaChevronRight, FaPen, FaTrash, FaEdit, FaKey,
-  FaCheckCircle, FaClock, FaTimesCircle, FaChevronUp,
+  FaCheckCircle, FaClock, FaTimesCircle, FaChevronUp, FaPhone,
+  FaWhatsapp,
 } from "react-icons/fa";
 import StudentNavbar from "../NavBar/Student_NavBar/StudentNavbar";
 import Footer from "../NavBar/Footer/Footer";
@@ -344,18 +345,46 @@ const AccommodationDetails = () => {
 
   /* ── IntersectionObserver — hide float btn when booking card visible ── */
   useEffect(() => {
-    if (!bookingCardRef.current) return;
+    if (!bookingCardRef.current) {
+      console.log('Booking card ref not available');
+      return;
+    }
+    console.log('Setting up IntersectionObserver for booking card');
     const obs = new IntersectionObserver(
-      ([entry]) => { setShowFloatBtn(!entry.isIntersecting); },
-      { threshold: 0.3 }
+      ([entry]) => {
+        console.log('IntersectionObserver entry:', entry.isIntersecting, entry.intersectionRatio);
+        setShowFloatBtn(!entry.isIntersecting);
+      },
+      { threshold: 0.1, rootMargin: '-100px 0px -100px 0px' }
     );
     obs.observe(bookingCardRef.current);
-    return () => obs.disconnect();
+    
+    // Fallback scroll listener for mobile
+    const handleScroll = () => {
+      if (!bookingCardRef.current) return;
+      const rect = bookingCardRef.current.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+      console.log('Scroll fallback - booking card visible:', isVisible, 'rect:', rect);
+      setShowFloatBtn(!isVisible);
+    };
+    
+    // Add scroll listener as backup
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      obs.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const scrollToBooking = () => {
     bookingCardRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
+
+  // Debug showFloatBtn state changes
+  useEffect(() => {
+    console.log('showFloatBtn changed to:', showFloatBtn);
+  }, [showFloatBtn]);
 
   useEffect(() => {
     if (!userId) return;
@@ -704,6 +733,27 @@ const AccommodationDetails = () => {
     }
   };
 
+  const handleWhatsApp = () => {
+    const phoneNumber = host?.phone;
+    if (!phoneNumber) {
+      toast("Phone number not available.", "error");
+      return;
+    }
+    // Remove any non-digit characters and ensure it starts with country code
+    const cleanPhone = phoneNumber.replace(/\D/g, '');
+    const whatsappUrl = `https://wa.me/${cleanPhone}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const handleCall = () => {
+    const phoneNumber = host?.phone;
+    if (!phoneNumber) {
+      toast("Phone number not available.", "error");
+      return;
+    }
+    window.open(`tel:${phoneNumber}`, '_self');
+  };
+
   const renderBookBtn = () => {
     if (!acc) return null;
     const st = normalizeBookingStatus(existingBooking?.status);
@@ -814,7 +864,7 @@ const AccommodationDetails = () => {
                           : <FaUserCircle style={{ fontSize: 36, color: "#bbb" }} />}
                       </div>
                       <div>
-                        <div className="acd-dropdown__hlbl">Hosted by</div>
+                        <div className="acd-dropdown__hlbl">Owner details</div>
                         <div className="acd-dropdown__hname">{host?.name ?? "Host"}</div>
                         <div className="acd-dropdown__hsince">{host?.joinedYear ? `Member since ${host.joinedYear}` : "Bodima Host"}</div>
                       </div>
@@ -834,18 +884,6 @@ const AccommodationDetails = () => {
           {acc && (
             <div className="acd-lhdr__below">
               {acc?.description && <div className="acd-lhdr__desc-text">{acc.description}</div>}
-              <div className="acd-lhdr__badges">
-                <span className={`acd-pill ${acc.isAvailable ? "acd-pill--green" : "acd-pill--red"}`}>
-                  <span className={`acd-pill__dot ${acc.isAvailable ? "acd-pill__dot--green" : "acd-pill__dot--red"}`} />
-                  {acc.isAvailable ? "Available" : "Not Available"}
-                </span>
-                {acc?.beds && <span className="acd-pill acd-pill--icon"><FaBed style={{ fontSize: 11 }} /> {acc.beds} bed{acc.beds !== 1 ? "s" : ""}</span>}
-                {acc?.bedrooms && <span className="acd-pill acd-pill--icon"><FaBed style={{ fontSize: 11 }} /> {acc.bedrooms} bedroom{acc.bedrooms !== 1 ? "s" : ""}</span>}
-                {acc?.bathrooms && <span className="acd-pill acd-pill--icon"><FaBath style={{ fontSize: 11 }} /> {acc.bathrooms} bath{acc.bathrooms !== 1 ? "s" : ""}</span>}
-                {acc?.genderPreference && <span className="acd-pill acd-pill--icon"><FaUsers style={{ fontSize: 11 }} /> {acc.genderPreference}</span>}
-                {acc?.keyMoneyDuration > 0 && <span className="acd-pill acd-pill--orange"><FaKey style={{ fontSize: 11 }} /> {acc.keyMoneyDuration} mo key money</span>}
-                {acc?.distance && acc.distance !== "Distance not available" && <span className="acd-pill acd-pill--icon"><FaMapMarkerAlt style={{ fontSize: 11 }} /> {acc.distance}</span>}
-              </div>
             </div>
           )}
         </div>
@@ -942,8 +980,8 @@ const AccommodationDetails = () => {
 
             {host && (
               <section className="acd-section">
-                <div className="acd-sec-title">Hosted by</div>
-                <div className="acd-hostcard">
+                <div className="acd-sec-title">Owner details</div>
+                <div className="acd-hostcard" style={{ alignItems: "center" }}>
                   <div className="acd-hostcard__ava-wrap">
                     {hostAvatar
                       ? <img src={hostAvatar} alt={host.name ?? "Host"} className="acd-hostcard__ava" onError={e => { e.currentTarget.style.display = "none"; }} />
@@ -955,30 +993,29 @@ const AccommodationDetails = () => {
                     <div className="acd-hostcard__sub">{host.isSuperhost && <span style={{ color: ORANGE, fontWeight: 600 }}>Superhost · </span>}{host.joinedYear ? `Joined ${host.joinedYear}` : ""}</div>
                     {host.about && <div style={{ fontSize: 13, color: "#545454", marginTop: 4, lineHeight: 1.5 }}>{host.about}</div>}
                     {(host.totalReviews ?? liveCount) > 0 && <div style={{ fontSize: 12, color: "#757575", marginTop: 2 }}>{host.totalReviews ?? liveCount} reviews</div>}
-                    {host.phone && <div style={{ fontSize: 13, color: "#757575", marginTop: 2 }}>📞 {host.phone}</div>}
+                    {host.phone && <div style={{ fontSize: 13, color: "#757575", marginTop: 2 }}><FaPhone style={{ fontSize: 12, marginRight: 5 }} />{host.phone}</div>}
                     {host.isVerified && (
                       <div style={{ display: "flex", gap: 8, marginTop: 6, flexWrap: "wrap" }}>
-                        {host.isVerified.email && <span className="acd-verified">✓ Email verified</span>}
                         {host.isVerified.phone && <span className="acd-verified">✓ Phone verified</span>}
                         {host.isVerified.id    && <span className="acd-verified">✓ ID verified</span>}
                       </div>
                     )}
                   </div>
-                  <button className="acd-hostcard__btn" onClick={openChat}><FaEnvelope style={{ marginRight: 7, fontSize: 13 }} /> Contact host</button>
+                  <div style={{ display: "flex", gap: 8, alignSelf: "flex-start", alignItems: "center", marginTop: "20px" }}>
+                    <button className="acd-hostcard__btn" onClick={openChat} style={{ minWidth: 120 }}>
+                      <FaEnvelope style={{ marginRight: 6, fontSize: 13 }} /> Message
+                    </button>
+                    <button className="acd-hostcard__btn" onClick={handleWhatsApp} style={{ minWidth: 120, background: "#25D366", color: "#fff", border: "none" }}>
+                      <FaWhatsapp style={{ marginRight: 6, fontSize: 14 }} /> WhatsApp
+                    </button>
+                    <button className="acd-hostcard__btn acd-hostcard__btn--mobile-only" onClick={handleCall} style={{ minWidth: 120, border: "1.5px solid #FF6B2B", background: "#fff", color: "#FF6B2B" }}>
+                      <FaPhone style={{ marginRight: 6, fontSize: 13 }} /> Call
+                    </button>
+                  </div>
                 </div>
               </section>
             )}
 
-            {(acc?.rules ?? []).length > 0 && (
-              <section className="acd-section">
-                <div className="acd-sec-title">House Rules</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                  {(acc.rules ?? []).map((rule, i) => (
-                    <div key={i} className="acd-amenity"><FaCheck className="acd-amenity__icon" style={{ color: ORANGE }} /><span>{rule}</span></div>
-                  ))}
-                </div>
-              </section>
-            )}
 
             {acc?.utilityBills && (
               <section className="acd-section">
