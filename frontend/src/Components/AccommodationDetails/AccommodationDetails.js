@@ -9,7 +9,7 @@ import {
   FaEllipsisH, FaSignInAlt, FaExclamationCircle, FaCalendarAlt,
   FaChevronLeft, FaChevronRight, FaPen, FaTrash, FaEdit, FaKey,
   FaCheckCircle, FaClock, FaTimesCircle, FaChevronUp, FaPhone,
-  FaWhatsapp, FaBolt,
+  FaWhatsapp, FaBolt, FaFaucet,
 } from "react-icons/fa";
 import StudentNavbar from "../NavBar/Student_NavBar/StudentNavbar";
 import Footer from "../NavBar/Footer/Footer";
@@ -1014,35 +1014,6 @@ const AccommodationDetails = () => {
             )}
 
 
-            {acc?.utilityBills && (
-              <section className="acd-section">
-                <div className="acd-sec-title">Utility Bills</div>
-                <div className="acd-utility-bills">
-                  <div className="acd-utility-item">
-                    <div className={`acd-utility-icon ${acc.utilityBills.electricityIncluded ? 'electricity-included' : 'not-included'}`}>
-                      <FaBolt />
-                    </div>
-                    <div className="acd-utility-info">
-                      <div className="acd-utility-name">Electricity Bill</div>
-                      <div className={`acd-utility-status ${acc.utilityBills.electricityIncluded ? 'electricity-included' : 'not-included'}`}>
-                        {acc.utilityBills.electricityIncluded ? 'Included' : 'Not Included'}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="acd-utility-item">
-                    <div className={`acd-utility-icon ${acc.utilityBills.waterIncluded ? 'water-included' : 'not-included'}`}>
-                      <FaTint />
-                    </div>
-                    <div className="acd-utility-info">
-                      <div className="acd-utility-name">Water Bill</div>
-                      <div className={`acd-utility-status ${acc.utilityBills.waterIncluded ? 'water-included' : 'not-included'}`}>
-                        {acc.utilityBills.waterIncluded ? 'Included' : 'Not Included'}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            )}
           </main>
 
           {/* BOOKING SIDEBAR */}
@@ -1096,6 +1067,8 @@ const AccommodationDetails = () => {
                 {acc.accommodationType && <div className="acd-infocard__row"><FaBed className="acd-infocard__icon" /><span>Type: <strong>{acc.accommodationType}</strong></span></div>}
                 {acc.beds && <div className="acd-infocard__row"><FaBed className="acd-infocard__icon" /><span>Beds: <strong>{acc.beds}</strong></span></div>}
                 {acc.keyMoneyDuration > 0 && <div className="acd-infocard__row"><FaKey className="acd-infocard__icon" /><span>Key money: <strong>{acc.keyMoneyDuration} months</strong></span></div>}
+                {acc?.utilityBills && <div className="acd-infocard__row"><FaBolt className="acd-infocard__icon" /><span>Electricity Bill: <strong>{acc.utilityBills.electricityIncluded ? 'Included' : 'Excluded'}</strong></span></div>}
+                {acc?.utilityBills && <div className="acd-infocard__row"><FaFaucet className="acd-infocard__icon" /><span>Water Bill: <strong>{acc.utilityBills.waterIncluded ? 'Included' : 'Excluded'}</strong></span></div>}
                 {acc.address && <div className="acd-infocard__row"><FaMapMarkerAlt className="acd-infocard__icon" /><span>{acc.address}</span></div>}
               </div>
             )}
@@ -1168,7 +1141,7 @@ const AccommodationDetails = () => {
           <div className="acd-float-book__inner">
             <div className="acd-float-book__price">
               {acc?.pricePerMonth
-                ? <><strong>Rs {acc.pricePerMonth?.toLocaleString()}</strong><span> / mo</span></>
+                ? <><strong>Rs {acc.pricePerMonth?.toLocaleString()}</strong><span> / month</span></>
                 : <span>View booking</span>}
             </div>
             <button className="acd-float-book__btn" style={{ fontFamily: FONT }} onClick={handleCall} disabled={!host?.phone}>
