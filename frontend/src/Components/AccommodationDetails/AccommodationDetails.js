@@ -1124,7 +1124,6 @@ const AccommodationDetails = () => {
           <div className="acd-wrapper">
             <div className="acd-map__title"><FaMapMarkerAlt style={{ color: ORANGE, marginRight: 6 }} /> Where you'll stay</div>
             <div className="acd-map__addr">{acc?.address}</div>
-            {acc?.distance && acc.distance !== "Distance not available" && <div style={{ fontSize: 13, color: "#757575", marginBottom: 12 }}>📍 {acc.distance} from university</div>}
             <div className="acd-map__wrap">
               <iframe className="acd-map__iframe" src={`https://maps.google.com/maps?q=${acc.location.coordinates[1]},${acc.location.coordinates[0]}&z=16&output=embed`} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title={acc?.title} />
               <div className="acd-map__card"><FaBed style={{ fontSize: 22, color: ORANGE }} /><div><div style={{ fontSize: 14, fontWeight: 700, color: "#000" }}>{acc?.title}</div><div style={{ fontSize: 12, color: "#757575", marginTop: 2 }}>{acc?.address}</div></div></div>
