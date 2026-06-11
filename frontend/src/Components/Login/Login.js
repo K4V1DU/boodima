@@ -78,7 +78,7 @@ export default function Login() {
             </p>
           </div>
           <div className="login-panel__footer">
-            © 2026 Unisewana.
+            © 2026 Boodima.
           </div>
         </div>
 
@@ -90,7 +90,7 @@ export default function Login() {
             <div className="login-brand">
               <img
                 src="/Images/66.png"
-                alt="UniSewana Logo"
+                alt="Boodima Logo"
                 className="login-brand__logo-img"
               />
             </div>

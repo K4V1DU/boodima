@@ -81,7 +81,7 @@ export default function ResetPassword() {
               your account secure.
             </p>
           </div>
-          <div className="reg-panel__footer">© 2026 Unisewana.</div>
+          <div className="reg-panel__footer">© 2026 Boodima.</div>
         </div>
 
         {/* Right panel — logo lives here */}
@@ -92,7 +92,7 @@ export default function ResetPassword() {
             <div className="reg-brand">
               <img
                 src="/Images/66.png"
-                alt="UniSewana Logo"
+                alt="Boodima Logo"
                 className="reg-brand__logo-img"
               />
             </div>

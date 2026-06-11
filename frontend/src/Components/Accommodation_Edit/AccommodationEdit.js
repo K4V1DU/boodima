@@ -401,7 +401,7 @@ function AccommodationEdit() {
     <div className="ae-root">
       <div className="ae-topbar">
         <a href="/Listings" className="hn-nav__logo">
-          <img src="/Images/66.png" alt="Unisewana Logo"
+          <img src="/Images/66.png" alt="Boodima Logo"
             style={{ height: "32px", width: "auto", display: "block" }} />
         </a>
         <button className="ae-exit-btn" onClick={handleExit}><X size={14} /> Exit</button>
@@ -424,7 +424,7 @@ function AccommodationEdit() {
       {/* Top Bar */}
       <div className="ae-topbar">
         <a href="/Listings" className="hn-nav__logo">
-          <img src="/Images/66.png" alt="Unisewana Logo"
+          <img src="/Images/66.png" alt="Boodima Logo"
             style={{ height: "32px", width: "auto", display: "block" }} />
         </a>
         <div className="ae-topbar-center">

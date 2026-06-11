@@ -100,7 +100,7 @@ export default function AdminNavBar({ activeHref = "" }) {
         {/* Logo */}
         <div className="an-nav__logo-wrap">
           <a href="/AdminDashboard" className="an-nav__logo">
-            <img src="/Images/66.png" alt="Unisewana Logo"
+            <img src="/Images/66.png" alt="Boodima Logo"
               style={{ height: "32px", width: "auto", display: "block" }} />
             <span className="an-admin-badge">ADMIN</span>
           </a>

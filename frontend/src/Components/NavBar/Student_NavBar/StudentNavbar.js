@@ -213,7 +213,7 @@ export default function StudentNavbar({ activeTab = "" }) {
           <a href="/Boardings" className="snav__logo">
             <img
               src="/Images/66.png"
-              alt="Unisewana Logo"
+              alt="Boodima Logo"
               style={{ height: "32px", width: "auto", display: "block" }}
             />
           </a>

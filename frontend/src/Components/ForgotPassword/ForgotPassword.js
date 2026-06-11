@@ -52,7 +52,7 @@ export default function ForgotPassword() {
               verification code to reset it.
             </p>
           </div>
-          <div className="reg-panel__footer">© 2026 Unisewana.</div>
+          <div className="reg-panel__footer">© 2026 Boodima.</div>
         </div>
 
         {/* Right panel — logo lives here */}
@@ -63,7 +63,7 @@ export default function ForgotPassword() {
             <div className="reg-brand">
               <img
                 src="/Images/66.png"
-                alt="UniSewana Logo"
+                alt="Boodima Logo"
                 className="reg-brand__logo-img"
               />
             </div>

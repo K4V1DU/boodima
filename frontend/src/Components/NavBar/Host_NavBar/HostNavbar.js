@@ -149,7 +149,7 @@ export default function HostNavbar({ activeHref = "" }) {
         {/* ── Left: Logo + Mobile chevron toggle ── */}
         <div className="hn-nav__logo-wrap">
           <a href="/Listings" className="hn-nav__logo">
-            <img src="/Images/66.png" alt="Unisewana Logo"
+            <img src="/Images/66.png" alt="Boodima Logo"
               style={{ height: "32px", width: "auto", display: "block" }} />
           </a>
 
