@@ -30,7 +30,7 @@ const refreshCookieOptions = {
 };
 
 // ── OTP email sender ──────────────────────────────────────────────
-const sendOtpEmail = async (email, otp, subject = "Your UniSewana OTP Code") => {
+const sendOtpEmail = async (email, otp, subject = "Your Boodima OTP Code") => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -41,14 +41,14 @@ const sendOtpEmail = async (email, otp, subject = "Your UniSewana OTP Code") => 
 
   const htmlContent = 
     '<div style="font-family:sans-serif;max-width:480px;margin:auto;padding:32px;border:1px solid #eee;border-radius:12px;">' +
-    '<h2 style="color:#e67e22;">UniSewana Email Verification</h2>' +
+    '<h2 style="color:#e67e22;">Boodima Email Verification</h2>' +
     '<p>Use the OTP below to complete your request. It expires in <strong>5 minutes</strong>.</p>' +
     '<div style="font-size:36px;font-weight:700;letter-spacing:8px;color:#c8541a;margin:24px 0;">' + otp + '</div>' +
     '<p style="color:#999;font-size:12px;">If you did not request this, you can safely ignore this email.</p>' +
     '</div>';
 
   await transporter.sendMail({
-    from:    '"UniSewana" <uniniwasa@gmail.com>',
+    from:    '"Boodima" <uniniwasa@gmail.com>',
     to:      email,
     subject,
     html:    htmlContent,
@@ -79,7 +79,7 @@ const sendOtp = async (req, res) => {
     global.pendingOtps          = global.pendingOtps || {};
     global.pendingOtps[email]   = { code: otp, expiresAt };
 
-    await sendOtpEmail(email, otp, "Your UniSewana Register OTP Code");
+    await sendOtpEmail(email, otp, "Your Boodima Register OTP Code");
     res.status(200).json({ success: true, message: "OTP sent to your email." });
   } catch (err) {
     console.error(err);
@@ -312,7 +312,7 @@ const forgotPasswordSendOtp = async (req, res) => {
     global.forgotOtps        = global.forgotOtps || {};
     global.forgotOtps[email] = { code: otp, expiresAt };
 
-    await sendOtpEmail(email, otp, "UniSewana Password Reset OTP");
+    await sendOtpEmail(email, otp, "Boodima Password Reset OTP");
     res.status(200).json({ success: true, message: "OTP sent to your email." });
   } catch (err) {
     console.error(err);
