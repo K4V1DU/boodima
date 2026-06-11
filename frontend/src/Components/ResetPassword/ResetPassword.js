@@ -91,7 +91,7 @@ export default function ResetPassword() {
             {/* Logo — consistent across all auth pages */}
             <div className="reg-brand">
               <img
-                src="/Images/logo2.png"
+                src="/Images/66.png"
                 alt="UniSewana Logo"
                 className="reg-brand__logo-img"
               />

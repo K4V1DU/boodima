@@ -89,7 +89,7 @@ export default function Login() {
             {/* Logo */}
             <div className="login-brand">
               <img
-                src="/Images/logo2.png"
+                src="/Images/66.png"
                 alt="UniSewana Logo"
                 className="login-brand__logo-img"
               />

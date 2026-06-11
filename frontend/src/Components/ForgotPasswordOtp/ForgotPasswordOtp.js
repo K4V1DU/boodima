@@ -117,7 +117,7 @@ export default function ForgotPasswordOtp() {
             {/* Logo — consistent with Login, Register & ForgotPassword */}
             <div className="reg-brand">
               <img
-                src="/Images/logo2.png"
+                src="/Images/66.png"
                 alt="UniSewana Logo"
                 className="reg-brand__logo-img"
               />

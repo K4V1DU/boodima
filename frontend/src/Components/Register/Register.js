@@ -189,7 +189,7 @@ export default function Register() {
 
             {/* Logo — mirrors Login layout */}
             <div className="reg-brand">
-              <img src="/Images/logo2.png" alt="UniSewana Logo" className="reg-brand__logo-img" />
+              <img src="/Images/66.png" alt="UniSewana Logo" className="reg-brand__logo-img" />
             </div>
 
             {/* SUCCESS */}
