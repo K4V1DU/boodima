@@ -454,7 +454,7 @@ const AddAccommodation = () => {
         <div className="hn-nav__logo-wrap">
           <a href="/Listings" className="hn-nav__logo">
             <img
-              src={showForm ? "/Images/66.png" : "/Images/logo6.png"}
+              src={showForm ? "/Images/66.png" : "/Images/66.png"}
               alt="Boodima Logo"
               style={{ height: "32px", width: "auto", display: "block" }}
             />
