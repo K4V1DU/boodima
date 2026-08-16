@@ -29,7 +29,7 @@ This platform revolutionizes how students and professionals find accommodation. 
 **Frontend:** React, Tailwind CSS / CSS3
 **Backend:** Node.js, Express
 **Database:** MongoDB
-**Other:** Real-time chat (Socket.io), JWT Authentication
+**Other:** JWT Authentication, Cloudinary (image storage), Groq API (AI features)
 
 ---
 
@@ -57,13 +57,27 @@ npm install
 
 ### Environment Variables
 
+Create a `.env` file in the `client` directory:
+
+```env
+REACT_APP_API_BASE_URL=http://localhost:8000
+```
+
 Create a `.env` file in the `server` directory:
 
 ```env
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-PORT=5000
+GROQ_API_KEY=your_groq_api_key
+MONGO_URI=your_mongodb_connection_string
+ACCESS_TOKEN_SECRET=your_access_token_secret
+REFRESH_TOKEN_SECRET=your_refresh_token_secret
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+NODE_ENV=development
+PORT=8000
 ```
+
+> ⚠️ Never commit your actual `.env` file. Add it to `.gitignore` and share only a `.env.example` with placeholder values.
 
 ### Run Locally
 
@@ -77,7 +91,7 @@ cd client
 npm start
 ```
 
-The app should now be running at `http://localhost:3000`.
+The app should now be running at `http://localhost:3000`, with the API served from `http://localhost:8000`.
 
 ---
 
