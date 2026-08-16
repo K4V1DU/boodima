@@ -46,24 +46,24 @@ This platform revolutionizes how students and professionals find accommodation. 
 git clone https://github.com/K4V1DU/boodima.git
 cd boodima
 
-# Install server dependencies
-cd server
+# Install backend dependencies
+cd Backend
 npm install
 
-# Install client dependencies
-cd ../client
+# Install frontend dependencies
+cd ../Frontend
 npm install
 ```
 
 ### Environment Variables
 
-Create a `.env` file in the `client` directory:
+Create a `.env` file in the `Frontend` directory:
 
 ```env
 REACT_APP_API_BASE_URL=http://localhost:8000
 ```
 
-Create a `.env` file in the `server` directory:
+Create a `.env` file in the `Backend` directory:
 
 ```env
 GROQ_API_KEY=your_groq_api_key
@@ -83,11 +83,11 @@ PORT=8000
 
 ```bash
 # Start the backend
-cd server
+cd Backend
 npm run dev
 
 # Start the frontend (in a new terminal)
-cd client
+cd Frontend
 npm start
 ```
 
