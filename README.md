@@ -4,7 +4,7 @@ A full-stack boarding rental platform connecting tenants with verified local lis
 
 This platform revolutionizes how students and professionals find accommodation. Built with modern web technology, it provides seamless browsing, secure communication, and verified landlords.
 
-**[🔗 Live Demo](#)**
+**[🔗 Live Demo](https://www.boodima.lk/)**
 
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
@@ -43,8 +43,8 @@ This platform revolutionizes how students and professionals find accommodation. 
 
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/boodima.lk.git
-cd boodima.lk
+git clone https://github.com/K4V1DU/boodima.git
+cd boodima
 
 # Install server dependencies
 cd server
@@ -89,7 +89,7 @@ This project is licensed under the MIT License.
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](../../issues).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/K4V1DU/boodima/issues).
 
 ---
 
