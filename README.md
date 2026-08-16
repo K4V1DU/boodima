@@ -1,4 +1,4 @@
-# 🏠 Boodima.lk
+# Boodima.lk
 
 A full-stack boarding rental platform connecting tenants with verified local listings — featuring real-time search, location filtering, listing management, and a fully responsive UI.
 
