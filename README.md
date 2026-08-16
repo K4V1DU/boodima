@@ -26,10 +26,10 @@ This platform revolutionizes how students and professionals find accommodation. 
 
 ## 🛠️ Tech Stack
 
-**Frontend:** React, Tailwind CSS / CSS3
-**Backend:** Node.js, Express
-**Database:** MongoDB
-**Other:** JWT Authentication, Cloudinary (image storage), Groq API (AI features)
+- **Frontend:** React, Tailwind CSS / CSS3
+- **Backend:** Node.js, Express
+- **Database:** MongoDB
+- **Other:** JWT Authentication, Cloudinary (image storage), Groq API (AI features)
 
 ---
 
