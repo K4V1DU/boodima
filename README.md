@@ -4,7 +4,7 @@ A full-stack boarding rental platform connecting tenants with verified local lis
 
 This platform revolutionizes how students and professionals find accommodation. Built with modern web technology, it provides seamless browsing, secure communication, and verified landlords.
 
-**[🔗 Live Demo](https://www.boodima.lk/)**
+**[Live Demo](https://www.boodima.lk/)**
 
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
@@ -13,18 +13,18 @@ This platform revolutionizes how students and professionals find accommodation. 
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔍 **Real-time Search & Location Filtering** — Find boarding listings by location, price, and amenities
-- 🏘️ **Listing Management** — Owners can add, edit, delete, and toggle listing status
-- 💬 **In-app Chat** — Real-time messaging between tenants and landlords with read receipts and file sharing
-- 📅 **Booking System** — Inquiry-based booking with status tracking
-- 🔐 **Secure Authentication** — Email/password login with password recovery
-- 📱 **Fully Responsive UI** — Optimized experience across desktop, tablet, and mobile
+- **Real-time Search & Location Filtering** — Find boarding listings by location, price, and amenities
+- **Listing Management** — Owners can add, edit, delete, and toggle listing status
+- **In-app Chat** — Real-time messaging between tenants and landlords with read receipts and file sharing
+- **Booking System** — Inquiry-based booking with status tracking
+- **Secure Authentication** — Email/password login with password recovery
+- **Fully Responsive UI** — Optimized experience across desktop, tablet, and mobile
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend:** React, Tailwind CSS / CSS3
 - **Backend:** Node.js, Express
@@ -33,7 +33,7 @@ This platform revolutionizes how students and professionals find accommodation. 
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js (v16+)
@@ -77,7 +77,7 @@ NODE_ENV=development
 PORT=8000
 ```
 
-> ⚠️ Never commit your actual `.env` file. Add it to `.gitignore` and share only a `.env.example` with placeholder values.
+> Never commit your actual `.env` file. Add it to `.gitignore` and share only a `.env.example` with placeholder values.
 
 ### Run Locally
 
@@ -95,18 +95,18 @@ The app should now be running at `http://localhost:3000`, with the API served fr
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/K4V1DU/boodima/issues).
 
 ---
 
-## 📬 Contact
+## Contact
 
 For questions or feedback, feel free to reach out via GitHub Issues.
